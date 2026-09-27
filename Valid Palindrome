@@ -1,27 +1,36 @@
-public boolean isPalindrome(String s) {
-    int left = 0, right = s.length() - 1;
+class Solution {
+    public boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            char l = s.charAt(left);
+            char r = s.charAt(right);
 
-    while (left < right) {
-        char l = s.charAt(left);
-        char r = s.charAt(right);
-
-        if (!isAlphaNum(l)) {
-            left++;
-        } else if (!isAlphaNum(r)) {
-            right--;
-        } else {
-            if (Character.toLowerCase(l) != Character.toLowerCase(r)) {
-                return false;
+            if (!isAlphaNum(l)) {
+                left++;
+            } else if (!isAlphaNum(r)) {
+                right--;
+            } else {
+                if (Character.toLowerCase(l) != Character.toLowerCase(r)) {
+                    return false;
+                }
+                left++;
+                right--;
             }
-            left++;
-            right--;
         }
+        return true;
     }
-    return true;
-}
 
-private boolean isAlphaNum(char c) {
-    return (c >= 'A' && c <= 'Z') ||
-           (c >= 'a' && c <= 'z') ||
-           (c >= '0' && c <= '9');
+    private boolean isAlphaNum(char c) {
+        return (c >= 'a' && c <= 'z') ||
+               (c >= 'A' && c <= 'Z') ||
+               (c >= '0' && c <= '9');
+    }
+
+    // Entry point to run tests
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.isPalindrome("A man, a plan, a canal: Panama")); // true
+        System.out.println(sol.isPalindrome("race a car")); // false
+        System.out.println(sol.isPalindrome(" ")); // true
+    }
 }
