@@ -1,0 +1,37 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if (s1.length() > s2.length()) return false;
+
+        // Build frequency map for s1
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : s1.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        int left = 0, count = s1.length();
+
+        // Sliding window over s2
+        for (int right = 0; right < s2.length(); right++) {
+            char ch = s2.charAt(right);
+            int val = map.getOrDefault(ch, 0);
+
+            if (val > 0) count--; // valid character found
+            map.put(ch, val - 1);
+
+            if (count == 0) return true; // all chars matched
+
+            // Maintain window size equal to s1 length
+            if (right - left + 1 == s1.length()) {
+                char leftChar = s2.charAt(left);
+                int leftVal = map.get(leftChar);
+                if (leftVal >= 0) count++; // restore count if valid char leaves window
+                map.put(leftChar, leftVal + 1);
+                left++;
+            }
+        }
+        return false;
+    }
+}
