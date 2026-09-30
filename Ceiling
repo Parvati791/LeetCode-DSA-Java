@@ -1,0 +1,19 @@
+class Solution {
+    public int findCeil(int[] arr, int x) {
+        int left = 0;
+        int right = arr.length - 1;
+        int ans = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] >= x) {
+                ans = mid;       // possible ceil found
+                right = mid - 1; // search further left for first occurrence
+            } else {
+                left = mid + 1;  // move right
+            }
+        }
+        return ans;
+    }
+}
