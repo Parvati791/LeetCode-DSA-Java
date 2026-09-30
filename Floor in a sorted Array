@@ -1,0 +1,19 @@
+class Solution {
+    public int findFloor(int[] arr, int x) {
+        int left = 0;
+        int right = arr.length - 1;
+        int ans = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] <= x) {
+                ans = mid;       // possible floor found
+                left = mid + 1;  // search further right for last occurrence
+            } else {
+                right = mid - 1; // move left
+            }
+        }
+        return ans;
+    }
+}
