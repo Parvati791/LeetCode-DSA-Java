@@ -1,0 +1,14 @@
+import java.util.Scanner;
+public class Main {
+n(String[] args) { public static void main(String[
+Scanner scanner = new Scanner(System.in);
+int n = scanner.nextInt();
+int max = scanner.nextInt();
+for(int i = 2 i <= n; i++){
+int val = scanner.nextInt();
+if(val > max){
+max = val;
+}
+System.out.println("Largest: " + max);
+scanner.close();
+}
